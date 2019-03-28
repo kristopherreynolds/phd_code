@@ -25,7 +25,7 @@ P.N = 420;
 P.range =28;
 P.estimation_method = 'svd';
 P.a = 1;
-P.plot_error = 1;
+P.plot_error = 0;
 hobj = hermite(P,data);
 hobj.fit_series
 hobj.plot

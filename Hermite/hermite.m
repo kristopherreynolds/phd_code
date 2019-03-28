@@ -9,6 +9,8 @@ classdef hermite<handle
         Hfuns %hermite functions matrix
         fhats %hermite coefficients
         fherm %bandlimited hermite expansion
+        fhats_rot %rotated hermite coefficients
+        fherm_rot %rotated hermite series
         nlse %normalized least-squares error (%)
         min_sval %minimum singular value
     end
@@ -128,9 +130,12 @@ classdef hermite<handle
         
         function rotate(obj,theta)
             N = obj.P.N;
-            S = S_generator_fun(N,theta);
-            fhat_rot = rotate_herm_coeffs(obj.fhats,S,N);
-            keyboard
+            %S = S_mat_mult(N,theta);
+            S = S_generator_faster_fun(N,theta);
+            obj.P.S = S;
+            obj.fhats_rot = rotate_herm_coeffs(obj.fhats,S,N);
+            obj.fhats_rot = real(obj.fhats_rot);
+            obj.fherm_rot = obj.Hfuns*obj.fhats_rot*obj.Hfuns';
         end
         
         

@@ -32,16 +32,19 @@ data = zero_pad_data(I,nzeros);
 clearvars -except data
 
 
-P.N = 420;
-P.range =28;
+P.N = 500;
+P.range =48;
 P.estimation_method = 'svd';
 P.clims = [0 255];
 P.cmap = 'gray';
-P.special_limits = 0;
+P.special_limits = 1;
 P.a = 1;
-P.plot_error = 1;
+P.plot_error = 0;
 hobj = hermite(P,data);
 hobj.fit_series
-hobj.plot
+%hobj.plot
 
-hobj
+theta = 0.2;
+hobj.rotate(theta);
+
+figure;imagesc(hobj.fherm_rot);axis equal
