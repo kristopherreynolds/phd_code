@@ -13,6 +13,7 @@ classdef hermite<handle
         fherm_rot %rotated hermite series
         nlse %normalized least-squares error (%)
         min_sval %minimum singular value
+        Radon_Surface
     end
     
     methods
@@ -130,14 +131,36 @@ classdef hermite<handle
         
         function rotate(obj,theta)
             N = obj.P.N;
-            %S = S_mat_mult(N,theta);
-            S = S_generator_faster_fun(N,theta);
+            S = S_mat_mult(N,theta);
+            %S = S_generator_faster_fun(N,theta);
             obj.P.S = S;
             obj.fhats_rot = rotate_herm_coeffs(obj.fhats,S,N);
             obj.fhats_rot = real(obj.fhats_rot);
             obj.fherm_rot = obj.Hfuns*obj.fhats_rot*obj.Hfuns';
         end
         
+        function radon(obj)
+        N = obj.P.N;
+        load Sstart.mat
+        load dS_0p01.mat
+        x = obj.P.x;
+        dx = mean(diff(x));
+        U = sum(obj.Hfuns,1)'*dx;
+        dtheta = 0.01; %hard coded since we load in the dS matrix
+        thetavec = -pi:dtheta:pi;
+        obj.Radon_Surface = zeros(numel(x),numel(thetavec));
+        fhats0 = rotate_herm_coeffs(obj.fhats,Sstart,N);
+        obj.Radon_Surface(:,1) = obj.Hfuns*fhats0*U;
+        hwb = waitbar(0,'making radon surface');
+        fhats_current = fhats0;
+        for ii = 2 : numel(thetavec)
+            fhats_current = rotate_herm_coeffs(fhats_current,dS,N);
+            obj.Radon_Surface(:,ii) = obj.Hfuns*fhats_current*U;
+            waitbar(ii/numel(thetavec))        
+        end
+        close(hwb)
+        
+        end
         
         
     end

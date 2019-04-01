@@ -44,7 +44,7 @@ hobj = hermite(P,data);
 hobj.fit_series
 %hobj.plot
 
-theta = 0.2;
-hobj.rotate(theta);
 
-figure;imagesc(hobj.fherm_rot);axis equal
+hobj.radon
+%figure;imagesc(hobj.fherm_rot);shg
+figure;imagesc(hobj.Radon_Surface)
