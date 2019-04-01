@@ -26,6 +26,7 @@ data = zero_pad_data(I,nzeros);
 I0 = imread('peppers.png');
 I = rgb2gray(I0);
 I = double(I);
+
 nzeros = [512*2-384,512];  
 data = zero_pad_data(I,nzeros);
 
@@ -42,9 +43,9 @@ P.a = 1;
 P.plot_error = 0;
 hobj = hermite(P,data);
 hobj.fit_series
-%hobj.plot
+hobj.plot
 
 
-hobj.radon
+%hobj.radon
 %figure;imagesc(hobj.fherm_rot);shg
-figure;imagesc(hobj.Radon_Surface)
+
