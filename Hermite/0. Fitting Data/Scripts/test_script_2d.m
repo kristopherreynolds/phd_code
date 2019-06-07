@@ -3,9 +3,6 @@ clear
 close all
 clc
 
-
-
-
 %create a square characteristic function
 x = linspace(-5,5,2^8);
 y = x;
@@ -23,12 +20,7 @@ nzeros = [size(I,1)];
 data = zero_pad_data(I,nzeros);
 
 %load peppers image
-I0 = imread('peppers.png');
-I = rgb2gray(I0);
-I = double(I);
-
-nzeros = [512*2-384,512];  
-data = zero_pad_data(I,nzeros);
+load peppers2.mat
 
 clearvars -except data
 
@@ -43,7 +35,6 @@ P.a = 1;
 P.plot_error = 0;
 hobj = hermite(P,data);
 hobj.fit_series
-hobj.plot
 
 
 %hobj.radon

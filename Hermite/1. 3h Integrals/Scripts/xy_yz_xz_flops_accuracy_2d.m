@@ -2,16 +2,12 @@ clear
 close all
 clc
 
-N = 150;
+N = 550;
 
 a = 1;
 b = 1;
 c = sqrt(2);
 
-
-% Sxy = fill_xy_plane(N,a,b,c);
-% Syz = fill_xy_plane(N,b,c,a);
-% Sxz = fill_xy_plane(N,a,c,b);
 
 [Sxy,Syz,Sxz] = fill_thi_planes(N,a,b,c);
 
@@ -28,6 +24,26 @@ for ii = 0 : N
 end
 
 fsz = 14;
+
+% dSxy = abs(Sxynum-Sxy);
+% 
+% err_vec_xy = zeros((N+1)^2,1);
+% xvec = err_vec_xy;
+% 
+% counter = 0;
+% for ii = 0 : N 
+%     for jj = 0 : N
+%         counter = counter + 1;
+%         err_vec_xy(counter) = dSxy(ii+1,jj+1);
+%         xvec(counter) = ii+jj;
+%     end
+% end
+% 
+% [~,isort] = sort(xvec);
+% figure
+% plot(xvec(isort),err_vec_xy(isort))
+% xlabel('m+n')
+% ylabel('absolute error')
 
 %XY
 figure

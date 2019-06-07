@@ -17,6 +17,7 @@ thi_k00(1) = thi_000; %starting value x
 
 i_even = 0:2:N;
 
+
 for ii = 2 : numel(i_even)
     i_even_current = i_even(ii);
     i_even_prev = i_even(ii-1);
@@ -28,9 +29,6 @@ for ii = 2 : numel(i_even)
     %propagate x 
     thi_k00(1+i_even_current) = z_flop_1d(k,thi_k00(1+i_even_prev),c,b,a); %swap c for a
        
-    if thi_00k(1+i_even_current)==0 && thi_0k0(1+i_even_current)==0 && thi_k00(1+i_even_current)==0
-        break
-    end
     
 end
 

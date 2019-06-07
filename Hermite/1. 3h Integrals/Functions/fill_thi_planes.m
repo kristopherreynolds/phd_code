@@ -72,6 +72,12 @@ for ipass = 1 : M
         else
         thi_p1_xy = thi_m1_xy;
         end
+        
+        pairs = [m+1,n;m,n+1];
+        odds = sum(pairs,2);
+        odds_bool = (round(odds/2)~=odds/2);
+        thi_p1_xy(odds_bool==1) = 0;
+        
         Sxy(m+1+1,n+1) = thi_p1_xy(1);
         Sxy(m+1,n+1+1) = thi_p1_xy(2);
         
@@ -85,6 +91,12 @@ for ipass = 1 : M
         else
             thi_p1_yz = thi_m1_yz;
         end
+        
+        pairs = [m+1,n;m,n+1];
+        odds = sum(pairs,2);
+        odds_bool = (round(odds/2)~=odds/2);
+        thi_p1_yz(odds_bool==1) = 0;
+        
         Syz(m+1+1,n+1) = thi_p1_yz(1);
         Syz(m+1,n+1+1) = thi_p1_yz(2);
         
@@ -98,6 +110,12 @@ for ipass = 1 : M
         else
             thi_p1_xz = thi_m1_xz;
         end
+        
+        pairs = [m+1,n;m,n+1];
+        odds = sum(pairs,2);
+        odds_bool = (round(odds/2)~=odds/2);
+        thi_p1_xz(odds_bool==1) = 0;
+        
         Sxz(m+1+1,n+1) = thi_p1_xz(1);
         Sxz(m+1,n+1+1) = thi_p1_xz(2);
         
